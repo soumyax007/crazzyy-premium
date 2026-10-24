@@ -76,11 +76,12 @@ header{position:fixed;inset:0 0 auto;z-index:50;display:flex;align-items:center;
 .rvh h2,.g h2{font-size:clamp(2rem,5.5vw,4.5rem)}
 
 /* ===== ROAD / SIGNATURE ===== */
-.road{position:relative;height:clamp(240px,40vh,400px);border-block:1px solid #ffffff14;overflow:clip;background:radial-gradient(#ffffff0f 1px,transparent 1.6px) 0 0/6px 6px,radial-gradient(#0000004d 1px,transparent 2px) 3px 3px/9px 9px,#1a1e20}
+.road{position:relative;height:clamp(200px,40vh,400px);border-block:1px solid #ffffff14;overflow:clip;background:radial-gradient(#ffffff0f 1px,transparent 1.6px) 0 0/6px 6px,radial-gradient(#0000004d 1px,transparent 2px) 3px 3px/9px 9px,#1a1e20}
 .road:before{content:"";position:absolute;left:0;right:0;top:50%;border-top:4px dashed #ffffff1f}
 .brand{position:absolute;inset:0;display:grid;place-items:center;font:700 clamp(3rem,17vw,16rem)/1 var(--hd);letter-spacing:.06em;padding-left:.06em;white-space:nowrap;color:var(--red);clip-path:inset(0 100% 0 0);text-shadow:0 0 40px #fdfb8e44;overflow:clip}
 .ghost{color:transparent;-webkit-text-stroke:1px #ffffff17;clip-path:none;text-shadow:none}
-.car{position:absolute;top:50%;width:clamp(150px,24vw,360px);height:auto;transform:translate(-50%,-50%);filter:drop-shadow(0 25px 25px #000b)}
+.car{position:absolute;top:50%;left:0;width:clamp(150px,24vw,360px);height:auto;transform:translateY(-50%);filter:drop-shadow(0 25px 25px #000b)}
+@media(max-width:767px){.car{width:clamp(120px,38vw,200px)}}
 /* No more left animation — use transform translateX instead */
 .rm .brand{clip-path:none}
 

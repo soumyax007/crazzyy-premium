@@ -140,30 +140,34 @@ gsap.matchMedia().add({
   gsap.from('.card',{x:60,opacity:0,duration:mob?.7:1,ease:E,stagger:mob?.06:.1,clearProps:'all',scrollTrigger:{trigger:'#tk',start:'top 85%'}});
 
   // ===== Signature: car drives across, brand is revealed =====
-  // Use transform translateX instead of animating `left`
   const car=$('.car'),br=$('.brand:not(.ghost)');
   if(car&&br){
-    // Set initial position with transform
-    gsap.set(car,{xPercent:-50,yPercent:-50,left:'50%',top:'50%'});
+    // Car width as a proportion of viewport for calculating offsets
+    const carW=car.offsetWidth;
+
+    // Starting position: car just off the left edge
+    // Ending position: car just off the right edge
+    gsap.set(car,{x:-carW,yPercent:-50});
 
     const roadTL=gsap.timeline({
       scrollTrigger:{
         trigger:'.road',
         start:'center center',
-        end:mob?'+=60%':'+=110%',
+        end:mob?'+=80%':'+=110%',
         pin:true,
-        scrub:true
+        scrub:mob?0.5:true
       }
     });
 
-    // Animate car using translateX (from -60% of viewport to 60%)
+    // Drive car from off-screen left to off-screen right
     roadTL.fromTo(car,
-      {x:()=>-window.innerWidth*.6},
-      {x:()=>window.innerWidth*.6,ease:'none'},
+      {x:-carW},
+      {x:()=>$('.road').offsetWidth+carW,ease:'none'},
       0
     );
 
-    // Brand reveal synced to car position
+    // Brand reveal timed to car crossing — starts when car enters,
+    // finishes slightly after car passes center
     roadTL.fromTo(br,
       {clipPath:'inset(0 100% 0 0)'},
       {clipPath:'inset(0 0% 0 0)',ease:'none'},
